@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Code Output Quiz</title>
+
+<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+body {
+    background: #0d1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3);
+}
+
+.logo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.brand-name {
+    color: #00c2ff;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
+}
+
+.header p {
+    color: #8b949e;
+    font-size: 1.1rem;
+}
+
+.quiz-title {
+    color: #f0f6fc;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, #00c2ff, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.editor-box {
+    width: 700px;
+    background: #161b22;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #30363d;
+    position: relative;
+}
+
+.watermark {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* New brand footer for screenshots */
+.brand-footer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(30, 34, 41, 0.9);
+    padding: 8px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #00c2ff;
+}
+
+.brand-footer-logo {
+    width: 65px;
+    height: 65px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.brand-footer-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.brand-footer-name {
+    color: #f0f6fc;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.brand-footer-handle {
+    color: #00c2ff;
+    font-size: 12px;
+}
+
+.title-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.red { background:#40ccc5; }
+.yellow { background:#e1e6e5; }
+.green { background:#40ccc5; }
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+.python-icon {
+    color: #1cb4be;
+    font-size: 18px;
+}
+
+.file-name {
+    color: #f0f6fc;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+pre {
+    background: #0d1117 !important;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    overflow-x: auto;
+    border: 1px solid #30363d;
+    margin: 0;
+    min-height: 300px;
+}
+
+code {
+    font-family: 'Fira Code', 'Consolas', monospace !important;
+    line-height: 1.5;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+button {
+    background: linear-gradient(135deg, #00c2ff, #0099cc);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 194, 255, 0.4);
+}
+
+button.secondary {
+    background: linear-gradient(135deg, #8b949e, #6e7681);
+}
+
+button.secondary:hover {
+    box-shadow: 0 6px 20px rgba(139, 148, 158, 0.4);
+}
+
+.screenshot-preview {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.preview-image {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 90%;
+    max-height: 80%;
+}
+
+.preview-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.answer-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #1e2229;
+    border-radius: 8px;
+    border-left: 4px solid #00c2ff;
+    display: none;
+}
+
+.answer-section h3 {
+    color: #00c2ff;
+    margin-bottom: 10px;
+}
+
+.answer-section pre {
+    background: #0d1117 !important;
+    padding: 15px;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="brand">
+        <div class="logo">
+            <!-- Your logo image will appear here -->
+        </div>
+        <h1 class="brand-name">CodeMaster</h1>
+    </div>
+    <p>Test your programming knowledge</p>
+</div>
+
+<div class="editor-box" id="captureArea">
+    <div class="watermark">@codemaster</div>
+    
+    <!-- New brand footer that appears in screenshots -->
+    <div class="brand-footer" id="brandFooter">
+        <div class="brand-footer-logo">
+            <!-- Footer logo will appear here -->
+        </div>
+        <div class="brand-footer-info">
+            <div class="brand-footer-name">ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ</div>
+            <div class="brand-footer-handle">@mr_programmer_24</div>
+        </div>
+    </div>
+    
+    <div class="quiz-title">What will be the output of the following code?</div>
+    
+    <div class="title-bar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <div class="file-info">
+            <i class="fab fa-python python-icon"></i>
+            <div class="file-name">Python Quiz</div>
+        </div>
+    </div>
+
+    <pre><code class="language-python" id="codeBlock"></code></pre>
+    
+    <div class="answer-section" id="answerSection">
+        <h3>Expected Output:</h3>
+        <pre><code class="language-python" id="outputBlock"></code></pre>
+    </div>
+</div>
+
+<div class="controls">
+    <button onclick="takeScreenshot()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21,15 16,10 5,21"></polyline>
+        </svg>
+        Take Screenshot
+    </button>
+    <button class="secondary" onclick="copyCode()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        Copy Code
+    </button>
+    <button class="secondary" onclick="showAnswer()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        Show Answer
+    </button>
+</div>
+
+<div id="screenshotPreview" class="screenshot-preview">
+    <div id="previewImage" class="preview-image"></div>
+    <div class="preview-actions">
+        <button onclick="downloadImage()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PNG
+        </button>
+        <button class="secondary" onclick="closePreview()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            Close
+        </button>
+    </div>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+// Quiz code with interesting output
+let quizCode = `Paste Your Code`;
+
+// Expected output
+let expectedOutput = `{}`;
+
+// Initialize code with Prism highlighting
+const codeElement = document.getElementById("codeBlock");
+const outputElement = document.getElementById("outputBlock");
+const answerSection = document.getElementById("answerSection");
+
+codeElement.textContent = quizCode;
+Prism.highlightAll();
+
+function takeScreenshot() {
+    html2canvas(document.querySelector("#captureArea"), {
+        scale: 2,
+        backgroundColor: null
+    }).then(canvas => {
+        const preview = document.getElementById("previewImage");
+        preview.innerHTML = '';
+        preview.appendChild(canvas);
+        document.getElementById("screenshotPreview").style.display = 'flex';
+    });
+}
+
+function downloadImage() {
+    const canvas = document.querySelector("#previewImage canvas");
+    if (canvas) {
+        const link = document.createElement("a");
+        link.download = "mr-programmer-quiz.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    }
+}
+
+function closePreview() {
+    document.getElementById("screenshotPreview").style.display = 'none';
+}
+
+function copyCode() {
+    navigator.clipboard.writeText(quizCode).then(() => {
+        alert('Quiz code copied to clipboard!');
+    });
+}
+
+function showAnswer() {
+    outputElement.textContent = expectedOutput;
+    answerSection.style.display = 'block';
+    Prism.highlightAll();
+}
+
+// Update branding with your logo image
+function updateBranding(logoImageUrl, brandName, instagramHandle) {
+    const logo = document.querySelector('.logo');
+    const brand = document.querySelector('.brand-name');
+    const watermark = document.querySelector('.watermark');
+    const footerLogo = document.querySelector('.brand-footer-logo');
+    const footerName = document.querySelector('.brand-footer-name');
+    const footerHandle = document.querySelector('.brand-footer-handle');
+    
+    // Add your logo image to main logo
+    logo.innerHTML = `<img src="${logoImageUrl}" alt="${brandName}" onerror="this.style.display='none'">`;
+    brand.textContent = brandName;
+    watermark.textContent = `@${instagramHandle}`;
+    
+    // Add logo and info to footer (for screenshots)
+    footerLogo.innerHTML = `<img src="${logoImageUrl}" alt="${brandName}" onerror="this.style.display='none'">`;
+    footerName.textContent = brandName;
+    footerHandle.textContent = `@${instagramHandle}`;
+}
+
+// SET YOUR BRANDING HERE - Replace these values:
+updateBranding(
+    'https://i.ibb.co/dwHRbkBZ/photo-2025-11-16-15-31-47.jpg',  // Replace with your logo URL
+    'ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ',                      // Your brand name
+    'mr_programmer_24'                     // Your Instagram handle
+);
+
+// Allow editing the code
+codeElement.addEventListener('input', function() {
+    quizCode = this.textContent;
+    Prism.highlightAll();
+});
+
+codeElement.setAttribute('contenteditable', 'true');
+</script>
+</body>
+</html>
