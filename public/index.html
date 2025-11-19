@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Code Output Quiz</title>
 
 <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
@@ -460,14 +461,6 @@ button.secondary:hover {
 }
 
 .screenshot-title {
-    /* color: #f0f6fc;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.6rem;
-    background: linear-gradient(135deg, #00c2ff, #ff6b6b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text; */
     color: #f0f6fc;
     text-align: center;
     margin-bottom: 25px;
@@ -476,7 +469,6 @@ button.secondary:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    
 }
 
 .screenshot-editor-box {
@@ -632,6 +624,36 @@ button.secondary:hover {
     100% {
         transform: translateY(0) rotate(360deg);
         opacity: 0.7;
+    }
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+    .editor-box {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .code-container {
+        min-height: 250px;
+        padding: 15px;
+    }
+    
+    /* Ensure contenteditable works properly on mobile */
+    .editable-code {
+        -webkit-user-select: text;
+        -webkit-tap-highlight-color: transparent;
+        min-height: 200px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 250px;
     }
 }
 </style>
@@ -965,13 +987,14 @@ updateBranding(
     'mr_programmer_24'                     // Your Instagram handle
 );
 
-// Handle code editing with proper highlighting
+// Handle code editing with proper highlighting - MOBILE COMPATIBLE
 codeElement.addEventListener('input', function() {
-    quizCode = this.textContent;
-    // Re-apply highlighting after a short delay to allow the DOM to update
+    // Use both textContent and innerText for mobile compatibility
+    quizCode = this.textContent || this.innerText;
+    
+    // Re-apply highlighting after a short delay
     setTimeout(() => {
         Prism.highlightElement(codeElement);
-        // Set cursor position to end after highlighting
         setEndOfContenteditable(codeElement);
     }, 10);
 });
@@ -989,16 +1012,75 @@ function setEndOfContenteditable(contentEditableElement) {
     }
 }
 
-// Fix for backspace and delete keys
+// Fix for Enter key to create new lines - MOBILE COMPATIBLE
 codeElement.addEventListener('keydown', function(e) {
-    // Allow normal typing behavior for all keys
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-        // These will work normally now
+    // Handle Enter key to create a new line
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        
+        // Get current selection
+        const selection = window.getSelection();
+        if (!selection.rangeCount) return;
+        
+        const range = selection.getRangeAt(0);
+        
+        // For mobile compatibility, use div approach instead of br
+        const newLineDiv = document.createElement('div');
+        newLineDiv.textContent = '\u00A0'; // Non-breaking space
+        
+        // Insert the new line
+        range.deleteContents();
+        range.insertNode(newLineDiv);
+        
+        // Move cursor to the new line
+        range.setStartAfter(newLineDiv);
+        range.setEndAfter(newLineDiv);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        // Update the quiz code
+        quizCode = codeElement.textContent || codeElement.innerText;
+        
+        // Re-apply highlighting
+        setTimeout(() => {
+            Prism.highlightElement(codeElement);
+            setEndOfContenteditable(codeElement);
+        }, 10);
+        
         return;
     }
     
-    // For other keys, ensure they work normally
-    if (e.key.length === 1) {
+    // Handle Tab key for indentation
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        
+        const selection = window.getSelection();
+        if (!selection.rangeCount) return;
+        
+        const range = selection.getRangeAt(0);
+        const tab = document.createTextNode('    '); // 4 spaces
+        
+        range.deleteContents();
+        range.insertNode(tab);
+        
+        range.setStartAfter(tab);
+        range.setEndAfter(tab);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        quizCode = codeElement.textContent || codeElement.innerText;
+        
+        setTimeout(() => {
+            Prism.highlightElement(codeElement);
+            setEndOfContenteditable(codeElement);
+        }, 10);
+        
+        return;
+    }
+    
+    // Allow normal typing behavior for all other keys
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+        // These will work normally now
         return;
     }
 });
