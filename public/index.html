@@ -81,18 +81,9 @@ body {
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.7;
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(0) rotate(360deg);
-        opacity: 0.7;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+    100% { transform: translateY(0) rotate(360deg); opacity: 0.7; }
 }
 
 .header {
@@ -168,7 +159,6 @@ body {
     font-style: italic;
 }
 
-/* New brand footer for screenshots */
 .brand-footer {
     position: absolute;
     bottom: 20px;
@@ -213,11 +203,7 @@ body {
     align-items: center;
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
 .red { background:#40ccc5; }
 .yellow { background:#e1e6e5; }
 .green { background:#40ccc5; }
@@ -229,16 +215,8 @@ body {
     margin-left: 15px;
 }
 
-.python-icon {
-    color: #1cb4be;
-    font-size: 18px;
-}
-
-.file-name {
-    color: #f0f6fc;
-    font-size: 16px;
-    font-weight: 600;
-}
+.python-icon { color: #1cb4be; font-size: 18px; }
+.file-name { color: #f0f6fc; font-size: 16px; font-weight: 600; }
 
 .code-container {
     background: #0d1117;
@@ -251,6 +229,7 @@ body {
     min-height: 300px;
     direction: ltr;
     text-align: left;
+    position: relative;
 }
 
 pre {
@@ -267,7 +246,7 @@ code {
     line-height: 1.5;
     direction: ltr;
     text-align: left;
-    white-space: pre-wrap;
+    white-space: pre-wrap !important; /* Important for wrapping */
     word-break: break-word;
 }
 
@@ -293,18 +272,10 @@ button {
     box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3);
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 194, 255, 0.4);
-}
+button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 194, 255, 0.4); }
 
-button.secondary {
-    background: linear-gradient(135deg, #8b949e, #6e7681);
-}
-
-button.secondary:hover {
-    box-shadow: 0 6px 20px rgba(139, 148, 158, 0.4);
-}
+button.secondary { background: linear-gradient(135deg, #8b949e, #6e7681); }
+button.secondary:hover { box-shadow: 0 6px 20px rgba(139, 148, 158, 0.4); }
 
 .screenshot-preview {
     display: none;
@@ -337,11 +308,7 @@ button.secondary:hover {
     margin: 0 auto;
 }
 
-.preview-actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-}
+.preview-actions { margin-top: 20px; display: flex; gap: 15px; }
 
 .answer-section {
     margin-top: 20px;
@@ -352,27 +319,18 @@ button.secondary:hover {
     display: none;
 }
 
-.answer-section h3 {
-    color: #00c2ff;
-    margin-bottom: 10px;
-}
+.answer-section h3 { color: #00c2ff; margin-bottom: 10px; }
+.answer-section pre { background: #0d1117 !important; padding: 15px; margin-top: 10px; }
 
-.answer-section pre {
-    background: #0d1117 !important;
-    padding: 15px;
-    margin-top: 10px;
-}
-
-/* Add styling for editable code */
 .editable-code {
     outline: none;
     white-space: pre-wrap;
     word-break: break-word;
     min-height: 250px;
     display: block;
+    caret-color: #00c2ff; /* Makes cursor visible and blue */
 }
 
-/* Toast notification */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -389,10 +347,7 @@ button.secondary:hover {
     gap: 10px;
 }
 
-.toast.show {
-    display: flex;
-    animation: fadeInOut 3s ease-in-out;
-}
+.toast.show { display: flex; animation: fadeInOut 3s ease-in-out; }
 
 @keyframes fadeInOut {
     0% { opacity: 0; bottom: 0; }
@@ -401,16 +356,8 @@ button.secondary:hover {
     100% { opacity: 0; bottom: 0; }
 }
 
-/* Special styling for screenshot */
-/* Modified: Removed fixed positioning that was breaking html2canvas alignment */
-.screenshot-wrapper {
-    /* The styles are now handled dynamically in JS to ensure offset rendering */
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Screenshot Styles */
+.screenshot-wrapper { width: auto; display: flex; justify-content: center; align-items: center; }
 .screenshot-container {
     width: 800px;
     background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
@@ -422,239 +369,58 @@ button.secondary:hover {
     overflow: hidden;
     margin: 0 auto;
 }
-
-.screenshot-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.screenshot-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 10px;
-}
-
+.screenshot-header { text-align: center; margin-bottom: 30px; }
+.screenshot-brand { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
 .screenshot-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3);
-    background: #161b22;
+    width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3); background: #161b22;
 }
-
-.screenshot-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.screenshot-brand-name {
-    color: #00c2ff;
-    font-size: 2.8rem;
-    text-shadow: 0 0 15px rgba(0, 194, 255, 0.3);
-}
-
+.screenshot-logo img { width: 100%; height: 100%; object-fit: cover; }
+.screenshot-brand-name { color: #00c2ff; font-size: 2.8rem; text-shadow: 0 0 15px rgba(0, 194, 255, 0.3); }
 .screenshot-title {
-    color: #f0f6fc;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.4rem;
-    background: linear-gradient(135deg, #00c2ff, #ff6b6b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #f0f6fc; text-align: center; margin-bottom: 25px; font-size: 1.4rem;
+    background: linear-gradient(135deg, #00c2ff, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-
-.screenshot-editor-box {
-    background: #161b22;
-    border-radius: 15px;
-    padding: 30px;
-    border: 1px solid #30363d;
-    position: relative;
-}
-
-.screenshot-watermark {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 12px;
-    font-style: italic;
-}
-
+.screenshot-editor-box { background: #161b22; border-radius: 15px; padding: 30px; border: 1px solid #30363d; position: relative; }
+.screenshot-watermark { position: absolute; top: 15px; right: 20px; color: rgba(255, 255, 255, 0.3); font-size: 12px; font-style: italic; }
 .screenshot-footer {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(30, 34, 41, 0.9);
-    padding: 8px 15px;
-    border-radius: 8px;
-    border-left: 3px solid #00c2ff;
+    position: absolute; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 10px;
+    background: rgba(30, 34, 41, 0.9); padding: 8px 15px; border-radius: 8px; border-left: 3px solid #00c2ff;
 }
-
-.screenshot-footer-logo {
-    width: 65px;
-    height: 65px;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.screenshot-footer-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.screenshot-footer-name {
-    color: #f0f6fc;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.screenshot-footer-handle {
-    color: #00c2ff;
-    font-size: 12px;
-}
-
-.screenshot-title-bar {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    align-items: center;
-}
-
-.screenshot-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
+.screenshot-footer-logo { width: 65px; height: 65px; border-radius: 6px; overflow: hidden; }
+.screenshot-footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+.screenshot-footer-name { color: #f0f6fc; font-size: 14px; font-weight: 600; }
+.screenshot-footer-handle { color: #00c2ff; font-size: 12px; }
+.screenshot-title-bar { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; }
+.screenshot-dot { width: 12px; height: 12px; border-radius: 50%; }
 .screenshot-red { background:#40ccc5; }
 .screenshot-yellow { background:#e1e6e5; }
 .screenshot-green { background:#40ccc5; }
-
-.screenshot-file-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 15px;
-}
-
-.screenshot-python-icon {
-    color: #1cb4be;
-    font-size: 18px;
-}
-
-.screenshot-file-name {
-    color: #f0f6fc;
-    font-size: 16px;
-    font-weight: 600;
-}
-
+.screenshot-file-info { display: flex; align-items: center; gap: 10px; margin-left: 15px; }
+.screenshot-python-icon { color: #1cb4be; font-size: 18px; }
+.screenshot-file-name { color: #f0f6fc; font-size: 16px; font-weight: 600; }
 .screenshot-code-container {
-    background: #0d1117;
-    padding: 25px;
-    border-radius: 10px;
-    font-size: 15px;
-    overflow-x: auto;
-    border: 1px solid #30363d;
-    margin: 0;
-    min-height: 320px;
-    direction: ltr;
-    text-align: left;
+    background: #0d1117; padding: 25px; border-radius: 10px; font-size: 15px;
+    overflow-x: auto; border: 1px solid #30363d; margin: 0; min-height: 320px; direction: ltr; text-align: left;
 }
-
-.screenshot-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-.screenshot-bg-element {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(0, 194, 255, 0.1);
-    animation: preview-float 20s infinite linear;
-}
-
-.screenshot-bg-element:nth-child(1) {
-    width: 200px;
-    height: 200px;
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-.screenshot-bg-element:nth-child(2) {
-    width: 150px;
-    height: 150px;
-    top: 60%;
-    left: 80%;
-    animation-delay: -5s;
-}
-
-.screenshot-bg-element:nth-child(3) {
-    width: 100px;
-    height: 100px;
-    top: 20%;
-    left: 70%;
-    animation-delay: -10s;
-}
+.screenshot-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.screenshot-bg-element { position: absolute; border-radius: 50%; background: rgba(0, 194, 255, 0.1); animation: preview-float 20s infinite linear; }
+.screenshot-bg-element:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 5%; animation-delay: 0s; }
+.screenshot-bg-element:nth-child(2) { width: 150px; height: 150px; top: 60%; left: 80%; animation-delay: -5s; }
+.screenshot-bg-element:nth-child(3) { width: 100px; height: 100px; top: 20%; left: 70%; animation-delay: -10s; }
 
 @keyframes preview-float {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.7;
-    }
-    50% {
-        transform: translateY(-15px) rotate(180deg);
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(0) rotate(360deg);
-        opacity: 0.7;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-15px) rotate(180deg); opacity: 0.3; }
+    100% { transform: translateY(0) rotate(360deg); opacity: 0.7; }
 }
 
-/* Mobile-specific fixes */
 @media (max-width: 768px) {
-    .editor-box {
-        width: 95%;
-        padding: 20px;
-    }
-    
-    .code-container {
-        min-height: 250px;
-        padding: 15px;
-    }
-    
-    /* Ensure contenteditable works properly on mobile */
-    .editable-code {
-        -webkit-user-select: text;
-        -webkit-tap-highlight-color: transparent;
-        min-height: 200px;
-    }
-    
-    .controls {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    button {
-        width: 100%;
-        max-width: 250px;
-    }
+    .editor-box { width: 95%; padding: 20px; }
+    .code-container { min-height: 250px; padding: 15px; }
+    .editable-code { -webkit-user-select: text; -webkit-tap-highlight-color: transparent; min-height: 200px; }
+    .controls { flex-direction: column; align-items: center; }
+    button { width: 100%; max-width: 250px; }
 }
 </style>
 </head>
@@ -669,8 +435,7 @@ button.secondary:hover {
 
 <div class="header">
     <div class="brand">
-        <div class="logo">
-            </div>
+        <div class="logo"></div>
         <h1 class="brand-name">ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ</h1>
     </div>
     <p>Test your programming knowledge</p>
@@ -680,8 +445,7 @@ button.secondary:hover {
     <div class="watermark"></div>
     
     <div class="brand-footer" id="brandFooter">
-        <div class="brand-footer-logo">
-            </div>
+        <div class="brand-footer-logo"></div>
         <div class="brand-footer-info">
             <div class="brand-footer-name">ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ</div>
             <div class="brand-footer-handle">@mr_programmer_24</div>
@@ -701,7 +465,7 @@ button.secondary:hover {
     </div>
 
     <div class="code-container">
-        <pre><code class="language-python editable-code" id="codeBlock" contenteditable="true"></code></pre>
+        <pre><code class="language-python editable-code" id="codeBlock" contenteditable="true" spellcheck="false"></code></pre>
     </div>
     
     <div class="answer-section" id="answerSection">
@@ -785,18 +549,52 @@ const answerSection = document.getElementById("answerSection");
 codeElement.textContent = quizCode;
 Prism.highlightElement(codeElement);
 
+// --- FIXED CODE EDITOR LOGIC ---
+
+// 1. Update the quizCode variable when typing, but DO NOT re-highlight continuously
+// Re-highlighting on every keypress breaks the cursor position
+codeElement.addEventListener('input', function() {
+    // Just update the variable text
+    quizCode = this.innerText; 
+});
+
+// 2. Re-highlight when the user clicks away (Blur)
+// This restores the pretty colors when you are done typing
+codeElement.addEventListener('blur', function() {
+    Prism.highlightElement(codeElement);
+});
+
+// 3. Handle Enter and Tab keys properly
+codeElement.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        // The Magic Fix: use execCommand to insert a real New Line (\n)
+        document.execCommand('insertText', false, '\n');
+        return;
+    }
+    
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        // Insert 4 spaces for tab
+        document.execCommand('insertText', false, '    ');
+        return;
+    }
+});
+// --- END FIXED LOGIC ---
+
 function takeScreenshot() {
+    // Force highlight before screenshot to ensure it looks good
+    Prism.highlightElement(codeElement);
+
     // Create a wrapper to ensure proper centering
     const screenshotWrapper = document.createElement('div');
     screenshotWrapper.className = 'screenshot-wrapper';
     
-    // FIXED: Position off-screen instead of using fixed+transform
-    // This prevents alignment issues in html2canvas
     screenshotWrapper.style.position = 'absolute';
     screenshotWrapper.style.top = '0';
     screenshotWrapper.style.left = '-9999px';
     
-    // Create a custom container for the screenshot with better structure
+    // Create a custom container for the screenshot
     const screenshotContainer = document.createElement('div');
     screenshotContainer.className = 'screenshot-container';
     
@@ -876,7 +674,8 @@ function takeScreenshot() {
     const pre = document.createElement('pre');
     const code = document.createElement('code');
     code.className = 'language-python';
-    code.textContent = quizCode;
+    // Use current content of the editor
+    code.textContent = codeElement.innerText; 
     pre.appendChild(code);
     codeContainer.appendChild(pre);
     
@@ -884,14 +683,11 @@ function takeScreenshot() {
     screenshotContainer.appendChild(editorBox);
     screenshotWrapper.appendChild(screenshotContainer);
     
-    // Add to body temporarily
     document.body.appendChild(screenshotWrapper);
     
     // Apply Prism highlighting to the screenshot code
     Prism.highlightElement(code);
     
-    // Take screenshot of the CONTAINER directly, not the wrapper
-    // We removed x, y, width, height options to let html2canvas auto-detect
     html2canvas(screenshotContainer, {
         scale: 2,
         backgroundColor: null,
@@ -901,7 +697,6 @@ function takeScreenshot() {
         const preview = document.getElementById("previewImage");
         preview.innerHTML = '';
         
-        // Center the canvas in the preview
         canvas.style.display = 'block';
         canvas.style.margin = '0 auto';
         canvas.style.maxWidth = '100%';
@@ -910,11 +705,9 @@ function takeScreenshot() {
         
         document.getElementById("screenshotPreview").style.display = 'flex';
         
-        // Remove the temporary container
         document.body.removeChild(screenshotWrapper);
     }).catch(error => {
         console.error('Screenshot error:', error);
-        // Remove the temporary container even if there's an error
         if (document.body.contains(screenshotWrapper)) {
             document.body.removeChild(screenshotWrapper);
         }
@@ -938,7 +731,7 @@ function closePreview() {
 }
 
 function copyCode() {
-    navigator.clipboard.writeText(quizCode).then(() => {
+    navigator.clipboard.writeText(codeElement.innerText).then(() => {
         showToast('Quiz code copied to clipboard!');
     });
 }
@@ -960,7 +753,6 @@ function showToast(message) {
     }, 3000);
 }
 
-// Update branding with your logo image
 function updateBranding(logoImageUrl, brandName, instagramHandle) {
     const logo = document.querySelector('.logo');
     const brand = document.querySelector('.brand-name');
@@ -969,126 +761,21 @@ function updateBranding(logoImageUrl, brandName, instagramHandle) {
     const footerName = document.querySelector('.brand-footer-name');
     const footerHandle = document.querySelector('.brand-footer-handle');
     
-    // Add your logo image to main logo
     logo.innerHTML = `<img src="${logoImageUrl}" alt="${brandName}" onerror="this.style.display='none'">`;
     brand.textContent = brandName;
     watermark.textContent = `@${instagramHandle}`;
     
-    // Add logo and info to footer (for screenshots)
     footerLogo.innerHTML = `<img src="${logoImageUrl}" alt="${brandName}" onerror="this.style.display='none'">`;
     footerName.textContent = brandName;
     footerHandle.textContent = `@${instagramHandle}`;
 }
 
-// SET YOUR BRANDING HERE - Replace these values:
 updateBranding(
-    'https://i.ibb.co/dwHRbkBZ/photo-2025-11-16-15-31-47.jpg',  // Replace with your logo URL
-    'ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ',                       // Your brand name
-    'mr_programmer_24'                     // Your Instagram handle
+    'https://i.ibb.co/dwHRbkBZ/photo-2025-11-16-15-31-47.jpg',
+    'ᴍʀ ᴘʀᴏɢʀᴀᴍᴍᴇʀ',
+    'mr_programmer_24'
 );
 
-// Handle code editing with proper highlighting - MOBILE COMPATIBLE
-codeElement.addEventListener('input', function() {
-    // Use both textContent and innerText for mobile compatibility
-    quizCode = this.textContent || this.innerText;
-    
-    // Re-apply highlighting after a short delay
-    setTimeout(() => {
-        Prism.highlightElement(codeElement);
-        setEndOfContenteditable(codeElement);
-    }, 10);
-});
-
-// Set cursor to end of contenteditable element
-function setEndOfContenteditable(contentEditableElement) {
-    let range, selection;
-    if (document.createRange) {
-        range = document.createRange();
-        range.selectNodeContents(contentEditableElement);
-        range.collapse(false);
-        selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-    }
-}
-
-// Fix for Enter key to create new lines - MOBILE COMPATIBLE
-codeElement.addEventListener('keydown', function(e) {
-    // Handle Enter key to create a new line
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        
-        // Get current selection
-        const selection = window.getSelection();
-        if (!selection.rangeCount) return;
-        
-        const range = selection.getRangeAt(0);
-        
-        // For mobile compatibility, use div approach instead of br
-        const newLineDiv = document.createElement('div');
-        newLineDiv.textContent = '\u00A0'; // Non-breaking space
-        
-        // Insert the new line
-        range.deleteContents();
-        range.insertNode(newLineDiv);
-        
-        // Move cursor to the new line
-        range.setStartAfter(newLineDiv);
-        range.setEndAfter(newLineDiv);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        
-        // Update the quiz code
-        quizCode = codeElement.textContent || codeElement.innerText;
-        
-        // Re-apply highlighting
-        setTimeout(() => {
-            Prism.highlightElement(codeElement);
-            setEndOfContenteditable(codeElement);
-        }, 10);
-        
-        return;
-    }
-    
-    // Handle Tab key for indentation
-    if (e.key === 'Tab') {
-        e.preventDefault();
-        
-        const selection = window.getSelection();
-        if (!selection.rangeCount) return;
-        
-        const range = selection.getRangeAt(0);
-        const tab = document.createTextNode('    '); // 4 spaces
-        
-        range.deleteContents();
-        range.insertNode(tab);
-        
-        range.setStartAfter(tab);
-        range.setEndAfter(tab);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        
-        quizCode = codeElement.textContent || codeElement.innerText;
-        
-        setTimeout(() => {
-            Prism.highlightElement(codeElement);
-            setEndOfContenteditable(codeElement);
-        }, 10);
-        
-        return;
-    }
-    
-    // Allow normal typing behavior for all other keys
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-        // These will work normally now
-        return;
-    }
-});
-
-// Initialize with cursor at the end
-setTimeout(() => {
-    setEndOfContenteditable(codeElement);
-}, 100);
 </script>
 </body>
 </html>
